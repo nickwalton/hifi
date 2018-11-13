@@ -3906,6 +3906,10 @@ void Application::keyPressEvent(QKeyEvent* event) {
         bool isShifted = event->modifiers().testFlag(Qt::ShiftModifier);
         bool isMeta = event->modifiers().testFlag(Qt::ControlModifier);
         bool isOption = event->modifiers().testFlag(Qt::AltModifier);
+        
+        float strength;
+        glm::vec3 dir;
+
         switch (event->key()) {
             case Qt::Key_Enter:
             case Qt::Key_Return:
@@ -3960,6 +3964,12 @@ void Application::keyPressEvent(QKeyEvent* event) {
                     //OffscreenUi::information("Debugging", "Component cache cleared");
                     // placeholder for dialogs being converted to QML.
                 }
+                break;
+                
+            case Qt::Key_Z:
+                dir = getMyAvatar()->getWorldVelocity();
+                strength = 1000;
+                getMyAvatar()->addThrust(glm::vec3(dir.x * strength, dir.y * strength, dir.z * strength));
                 break;
 
             case Qt::Key_Y:
